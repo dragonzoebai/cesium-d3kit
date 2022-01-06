@@ -1,48 +1,67 @@
+<link href="libs/Cesium/Widgets/widgets.css" rel="stylesheet">
+<script src="libs/Cesium/Cesium.js"></script>
+<script src="libs/cesium-d3kit.js"></script>
+<style>
+	html,
+	body,
+	#viewer-container {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
 <div id="viewer-container"></div>
 <script>
-  let viewer = new Cesium.Viewer("viewer-container", { infoBox: false, shouldAnimate: true });
+	Cesium.Ion.defaultAccessToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3N2FhYzAyOC1kYzcxLTQwZWUtYWI2MC0wNDJhZTJhZGQ4ZTIiLCJpZCI6MzQyMzUsImlhdCI6MTYwMDA0OTU5NH0.SlTb3WwEkqzriXXOnS6mW3qnICyxH84BF9l6UuAh8ao';
+	
+	let viewer = new Cesium.Viewer("viewer-container", {
+		infoBox: false,
+		shouldAnimate: true
+	});
 
-  let d3kit = new Cesium.D3Kit(viewer)
+	let d3kit = new Cesium.D3Kit(viewer)
 
-  let layer = viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
-    style: 'dark'
-  }));
-  viewer.scene.sun.show = false;
-  viewer.scene.moon.show = false;
-  viewer.scene.skyAtmosphere.show = false;
+	let layer = viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
+		style: 'dark'
+	}));
+	viewer.scene.sun.show = false;
+	viewer.scene.moon.show = false;
+	viewer.scene.skyAtmosphere.show = false;
 
-  var tilesets = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
-    url: 'data/3DTiles/building/tileset.json'
-  }));
-  tilesets.readyPromise.then(function (tileset) {
+	var tilesets = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+		url: 'data/3DTiles/building/tileset.json'
+	}));
+	tilesets.readyPromise.then(function(tileset) {
 
-    tileset.style = new Cesium.Cesium3DTileStyle({
-      color: {
-        conditions: [
-          ["${height} >= 300", "rgba(0, 149, 251, 0.3)"],
-          ["${height} >= 200", "rgb(0, 149, 251, 0.3)"],
-          ["${height} >= 100", "rgb(0, 149, 251, 0.3)"],
-          ["${height} >= 50", "rgb(0, 149, 251, 0.3)"],
-          ["${height} >= 25", "rgb(0, 149, 251, 0.3)"],
-          ["${height} >= 10", "rgb(0, 149, 251, 0.3)"],
-          ["${height} >= 5", "rgb(0, 149, 251, 0.3)"],
-          ["true", "rgb(0, 149, 251, 0.3)"]
-        ]
-      }
-    });
+		tileset.style = new Cesium.Cesium3DTileStyle({
+			color: {
+				conditions: [
+					["${height} >= 300", "rgba(0, 149, 251, 0.3)"],
+					["${height} >= 200", "rgb(0, 149, 251, 0.3)"],
+					["${height} >= 100", "rgb(0, 149, 251, 0.3)"],
+					["${height} >= 50", "rgb(0, 149, 251, 0.3)"],
+					["${height} >= 25", "rgb(0, 149, 251, 0.3)"],
+					["${height} >= 10", "rgb(0, 149, 251, 0.3)"],
+					["${height} >= 5", "rgb(0, 149, 251, 0.3)"],
+					["true", "rgb(0, 149, 251, 0.3)"]
+				]
+			}
+		});
 
-    viewer.flyTo(tileset)
+		viewer.flyTo(tileset)
 
-    d3kit.showPrimitiveMatrixPanel(tileset)
-  });
+		d3kit.showPrimitiveMatrixPanel(tileset)
+	});
 </script>
 <style>
-  .layui-card {
-    position: absolute;
-    top: 10px;
-    left: 5px;
-    background-color: #ffffff6b;
-    box-shadow: inset 1px 2px 2px 0 #f2f6fc;
-    color: white
-  }
+	.layui-card {
+		position: absolute;
+		top: 10px;
+		left: 5px;
+		background-color: #ffffff6b;
+		box-shadow: inset 1px 2px 2px 0 #f2f6fc;
+		color: white
+	}
 </style>

@@ -1,34 +1,42 @@
-<!--
- * @Descripttion: 
- * @version: 1.0.0
- * @Author: zhangti
- * @Date: 2020-03-05 03:58:30
- * @LastEditors: zhangti
- * @LastEditTime: 2020-05-11 11:04:07
- -->
+<link href="libs/Cesium/Widgets/widgets.css" rel="stylesheet">
+<script src="libs/Cesium/Cesium.js"></script>
+<script src="libs/cesium-d3kit.js"></script>
+<style>
+	html,
+	body,
+	#viewer-container {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
 <div id="viewer-container"></div>
 <script>
-  this._viewer = new Cesium.Viewer("viewer-container");
+	Cesium.Ion.defaultAccessToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3N2FhYzAyOC1kYzcxLTQwZWUtYWI2MC0wNDJhZTJhZGQ4ZTIiLCJpZCI6MzQyMzUsImlhdCI6MTYwMDA0OTU5NH0.SlTb3WwEkqzriXXOnS6mW3qnICyxH84BF9l6UuAh8ao';
 
-  this._viewer.scene.globe.enableLighting = true;
+	this._viewer = new Cesium.Viewer("viewer-container");
 
-  this._d3kit = new Cesium.D3Kit(this._viewer)
+	this._viewer.scene.globe.enableLighting = true;
 
-  let layer = this._viewer.imageryLayers.addImageryProvider(new Cesium.SingleTileImageryProvider({
-    url: 'data/images/tile/world_b.jpg'
-  }));
-  layer.name = '科技', layer.id = 'layer1', layer.show = false;
+	this._d3kit = new Cesium.D3Kit(this._viewer)
 
-  let layer2 = this._viewer.imageryLayers.addImageryProvider(new Cesium.SingleTileImageryProvider({
-    url: 'data/images/tile/world_d.jpg'
-  }));
-  layer2.name = '云图', layer2.id = 'layer2', layer2.show = false;
+	let layer = this._viewer.imageryLayers.addImageryProvider(new Cesium.SingleTileImageryProvider({
+		url: 'data/images/tile/world_b.jpg'
+	}));
+	layer.name = '科技', layer.id = 'layer1', layer.show = false;
 
-  let layer3 = this._viewer.imageryLayers.addImageryProvider(new Cesium.SingleTileImageryProvider({
-    url: 'data/images/tile/world_n.jpg'
-  }));
-  layer3.name = '夜晚', layer3.id = 'layer3', layer3.show = true,
-    layer3.dayAlpha = 0.0, layer3.nightAlpha = 1.0, layer3.brightness = 3.5;
+	let layer2 = this._viewer.imageryLayers.addImageryProvider(new Cesium.SingleTileImageryProvider({
+		url: 'data/images/tile/world_d.jpg'
+	}));
+	layer2.name = '云图', layer2.id = 'layer2', layer2.show = false;
 
-  this._d3kit.showLayerSwitchPanel([layer, layer2, layer3])
+	let layer3 = this._viewer.imageryLayers.addImageryProvider(new Cesium.SingleTileImageryProvider({
+		url: 'data/images/tile/world_n.jpg'
+	}));
+	layer3.name = '夜晚', layer3.id = 'layer3', layer3.show = true,
+		layer3.dayAlpha = 0.0, layer3.nightAlpha = 1.0, layer3.brightness = 3.5;
+
+	this._d3kit.showLayerSwitchPanel([layer, layer2, layer3])
 </script>

@@ -1,29 +1,46 @@
+<link href="libs/Cesium/Widgets/widgets.css" rel="stylesheet">
+<script src="libs/Cesium/Cesium.js"></script>
+<script src="libs/cesium-d3kit.js"></script>
+<style>
+	html,
+	body,
+	#viewer-container {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
 <div id="viewer-container"></div>
 <script>
-  this._viewer = new Cesium.Viewer("viewer-container", { infoBox: false });
+	this._viewer = new Cesium.Viewer("viewer-container", {
+		infoBox: false
+	});
 
-  this._d3kit = new Cesium.D3Kit(this._viewer)
+	this._d3kit = new Cesium.D3Kit(this._viewer)
 
-  let key = '1c3ff1358b17417f1782dd1ae7bdd00a'
-  let layer = this._viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider({
-    key,
-    style: 'cva'
-  }));
-  layer.name = '影像', layer.id = 'layer1', layer.show = false;
+	let key = '1c3ff1358b17417f1782dd1ae7bdd00a'
+	let layer = this._viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider({
+		key,
+		style: 'cva'
+	}));
+	layer.name = '影像', layer.id = 'layer1', layer.show = false;
 
-  let layer2 = this._viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider({ key }));
-  layer2.name = '电子', layer2.id = 'layer2', layer2.show = false;
+	let layer2 = this._viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider({
+		key
+	}));
+	layer2.name = '电子', layer2.id = 'layer2', layer2.show = false;
 
-  let layer3 = this._viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider({
-    key,
-    style: 'img'
-  }));
-  layer3.name = '影像', layer3.id = 'layer3', layer3.show = true;
+	let layer3 = this._viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider({
+		key,
+		style: 'img'
+	}));
+	layer3.name = '影像', layer3.id = 'layer3', layer3.show = true;
 
-  let layer4 = this._viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider({
-    key,
-    style: 'ter'
-  }));
-  layer4.name = '地形', layer4.id = 'layer3', layer4.show = true;
-  this._d3kit.showLayerSwitchPanel([layer, layer2, layer3, layer4])
+	let layer4 = this._viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider({
+		key,
+		style: 'ter'
+	}));
+	layer4.name = '地形', layer4.id = 'layer3', layer4.show = true;
+	this._d3kit.showLayerSwitchPanel([layer, layer2, layer3, layer4])
 </script>

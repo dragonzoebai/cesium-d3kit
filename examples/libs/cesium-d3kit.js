@@ -9,14 +9,6 @@
  */
 ; if (typeof Cesium !== 'undefined')
     Cesium.D3Kit = (function () {
-        // 版本
-        var version = '1.5'
-        // 作者
-        var author = 'zhangti'
-        // 地址
-        var github = 'https://github.com/zhangti0708/cesium-examples'
-        // 示例地址
-        var examplesAddr = 'http://zhangticcc.gitee.io/webgis'
         // cesium版本
         var CesiumVersion = Cesium.VERSION || ''
         /**
@@ -1882,7 +1874,6 @@
             createVideoPlaneGraphics: function (options) {
 
                 if (options && options.position) {
-
                     var entity = this.createGraphics()
                     entity.position = options.position
                     entity.plane = {
@@ -1909,7 +1900,7 @@
                         img.src = url
                         img.setAttribute('rel:animated_src', url) // gif库需要img标签配置下面两个属性
                         img.setAttribute('rel:auto_play', '0')
-                        document.body.appendChild(img)
+                        // document.body.appendChild(img)
                         // 新建gif实例
                         var rub = new SuperGif({ gif: img });
                         return new Promise((resolve) => {
@@ -6091,8 +6082,6 @@
              */
             _installTetrahedronPrimitive: function () {
                 try {
-
-
                     var Cartesian3 = Cesium.Cartesian3
                         , ComponentDatatype = Cesium.ComponentDatatype
                         , PrimitiveType = Cesium.PrimitiveType
@@ -10350,25 +10339,6 @@
         // }
 
         console.clear()
-        console.log(
-            `%c \n D3-KIT \n  %c \n  基于Cesium三维拓展包  %c \n
-        版本:${version}
-        作者:${author}
-        主页: http://www.ztwow.top
-        github: ${github}
-        示例地址: ${examplesAddr}
-        Cesium版本:${CesiumVersion}
-        版权声明:
-        1.代码包基于Cesium拓展,部分模块开源已上传github。
-        2.后续会继续更新拓展,目前该代码包不开源,如需使用:
-            1)代码包的完整引用
-            2)此版权信息在控制台输出
-        我方保留对此版权信息的最终解释权。`,
-            'font-size:20px;padding-left:70px;color:#EEB422',
-            'font-size:14px;padding-left:50px;color:#EEB422;font-style:oblique',
-            'font-size:14px;color:#0865ba'
-        )
-
         return _
     })();
 

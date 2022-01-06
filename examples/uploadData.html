@@ -1,28 +1,37 @@
-<!--
- * @Descripttion: 
- * @version: 1.0.0
- * @Author: zhangti
- * @Date: 2020-03-05 03:58:30
- * @LastEditors: zhangti
- * @LastEditTime: 2020-07-26 17:37:38
- -->
+<link href="libs/Cesium/Widgets/widgets.css" rel="stylesheet">
+<script src="libs/Cesium/Cesium.js"></script>
+<script src="libs/cesium-d3kit.js"></script>
+<style>
+	html,
+	body,
+	#viewer-container {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
 <div id="viewer-container"></div>
 <script>
+	Cesium.Ion.defaultAccessToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3N2FhYzAyOC1kYzcxLTQwZWUtYWI2MC0wNDJhZTJhZGQ4ZTIiLCJpZCI6MzQyMzUsImlhdCI6MTYwMDA0OTU5NH0.SlTb3WwEkqzriXXOnS6mW3qnICyxH84BF9l6UuAh8ao';
+	
+	let viewer = new Cesium.Viewer("viewer-container", {
+		infoBox: false,
+		shouldAnimate: true
+	});
 
-  let viewer = new Cesium.Viewer("viewer-container", { infoBox: false, shouldAnimate: true });
+	let d3kit = new Cesium.D3Kit(viewer)
 
-  let d3kit = new Cesium.D3Kit(viewer)
-  
-  d3kit.showLoadDataToScenePanel()
-
+	d3kit.showLoadDataToScenePanel()
 </script>
 <style>
-  .layui-card {
-    position: absolute;
-    top: 10px;
-    left: 5px;
-    background-color: #ffffff6b;
-    box-shadow: inset 1px 2px 2px 0 #f2f6fc;
-    color: white
-  }
+	.layui-card {
+		position: absolute;
+		top: 10px;
+		left: 5px;
+		background-color: #ffffff6b;
+		box-shadow: inset 1px 2px 2px 0 #f2f6fc;
+		color: white
+	}
 </style>

@@ -1,65 +1,83 @@
-<!--
- * @Descripttion: 
- * @version: 1.0.0
- * @Author: zhangti
- * @Date: 2020-03-05 03:58:30
- * @LastEditors: zhangti
- * @LastEditTime: 2020-05-12 20:25:07
- -->
+<link href="libs/Cesium/Widgets/widgets.css" rel="stylesheet">
+<script src="libs/Cesium/Cesium.js"></script>
+<script src="libs/cesium-d3kit.js"></script>
+<script src="libs/jquery.min.js"></script>
+<style>
+	html,
+	body,
+	#viewer-container {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
 <div id="viewer-container"></div>
 <div class="layui-card">
-  <div class="layui-card-header" style="color:white">高精度地形</div>
-  <div class="layui-card-body">
-    <div>加载:
-      <button type="button" class="layui-btn layui-btn-sm">全球</button>
-      <button type="button" class="layui-btn layui-btn-sm">中国</button>
-      <button type="button" class="layui-btn layui-btn-sm">球面</button>
-    </div>
-  </div>
+	<div class="layui-card-header" style="color:white">高精度地形</div>
+	<div class="layui-card-body">
+		<div>加载:
+			<button type="button" class="layui-btn layui-btn-sm">全球</button>
+			<button type="button" class="layui-btn layui-btn-sm">中国</button>
+			<button type="button" class="layui-btn layui-btn-sm">球面</button>
+		</div>
+	</div>
 </div>
 <script>
-  Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYTQ2ZjdjNS1jM2E0LTQ1M2EtOWM0My1mODMzNzY3YjYzY2YiLCJpZCI6MjkzMjcsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1OTE5NDIzNjB9.RzKlVTVDTQ9r7cqCo-PDydgUh8Frgw0Erul_BVxiS9c';
+	Cesium.Ion.defaultAccessToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYTQ2ZjdjNS1jM2E0LTQ1M2EtOWM0My1mODMzNzY3YjYzY2YiLCJpZCI6MjkzMjcsInNjb3BlcyI6WyJhc3IiLCJnYyJdLCJpYXQiOjE1OTE5NDIzNjB9.RzKlVTVDTQ9r7cqCo-PDydgUh8Frgw0Erul_BVxiS9c';
 
-  let viewer = new Cesium.Viewer("viewer-container", { infoBox: false });
+	let viewer = new Cesium.Viewer("viewer-container", {
+		infoBox: false
+	});
 
-  this._d3kit = new Cesium.D3Kit(viewer)
+	this._d3kit = new Cesium.D3Kit(viewer)
 
-  //viewer.addTerrain()
-  function world() {
+	//viewer.addTerrain()
+	function world() {
 
-    viewer.terrainProvider = new Cesium.createWorldTerrain({
-      requestWaterMask: true,
-      requestVertexNormals: true
-    });
-  }
+		viewer.terrainProvider = new Cesium.createWorldTerrain({
+			requestWaterMask: true,
+			requestVertexNormals: true
+		});
+	}
 
-  function china() {
+	function china() {
 
-    viewer.terrainProvider = new Cesium.CesiumTerrainProvider({ url: '/chinadem' })
-  }
-  function init() {
+		viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
+			url: '/chinadem'
+		})
+	}
 
-    viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider({})
-  }
+	function init() {
 
-  $('.layui-card-body button').on('click', function () {
-    let text = $(this).text()
-    if (text) {
-      switch (text) {
-        case '全球': world(); break;
-        case '中国': china(); break;
-        case '球面': init(); break;
-      }
-    }
-  })
+		viewer.terrainProvider = new Cesium.EllipsoidTerrainProvider({})
+	}
+
+	$('.layui-card-body button').on('click', function() {
+		let text = $(this).text()
+		if (text) {
+			switch (text) {
+				case '全球':
+					world();
+					break;
+				case '中国':
+					china();
+					break;
+				case '球面':
+					init();
+					break;
+			}
+		}
+	})
 </script>
 <style>
-  .layui-card {
-    position: absolute;
-    top: 10px;
-    left: 5px;
-    background-color: #ffffff6b;
-    box-shadow: inset 1px 2px 2px 0 #f2f6fc;
-    color: white
-  }
+	.layui-card {
+		position: absolute;
+		top: 10px;
+		left: 5px;
+		background-color: #ffffff6b;
+		box-shadow: inset 1px 2px 2px 0 #f2f6fc;
+		color: white
+	}
 </style>

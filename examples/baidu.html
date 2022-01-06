@@ -1,30 +1,52 @@
+<link href="libs/Cesium/Widgets/widgets.css" rel="stylesheet" />
+<link href="libs/layui.css" rel="stylesheet" media="all" />
+<script src="libs/Cesium/Cesium.js"></script>
+<script src="libs/cesium-d3kit.js"></script>
+<script src="libs/dat.gui.min.js"></script>
+<script src="libs/layui.all.js"></script>
+<script src="libs/jquery.min.js"></script>
+<style>
+	html,
+	body,
+	#viewer-container {
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+	}
+</style>
 <div id="viewer-container"></div>
 <script>
-  this._viewer = new Cesium.Viewer("viewer-container", { infoBox: false });
+	Cesium.Ion.defaultAccessToken =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3N2FhYzAyOC1kYzcxLTQwZWUtYWI2MC0wNDJhZTJhZGQ4ZTIiLCJpZCI6MzQyMzUsImlhdCI6MTYwMDA0OTU5NH0.SlTb3WwEkqzriXXOnS6mW3qnICyxH84BF9l6UuAh8ao';
 
-  this._d3kit = new Cesium.D3Kit(this._viewer)
-  let layer = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({}));
-  layer.name = '电子', layer.id = 'layer1';
+	this._viewer = new Cesium.Viewer("viewer-container", {
+		infoBox: false
+	});
 
-  let layer2 = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
-    style: 'midnight'
-  }));
-  layer2.name = '午夜蓝', layer2.id = 'layer2', layer2.show = false;
+	this._d3kit = new Cesium.D3Kit(this._viewer)
+	let layer = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({}));
+	layer.name = '电子', layer.id = 'layer1';
 
-  let layer3 = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
-    style: 'dark'
-  }));
-  layer3.name = '黑夜', layer3.id = 'layer3', layer3.show = false;
+	let layer2 = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
+		style: 'midnight'
+	}));
+	layer2.name = '午夜蓝', layer2.id = 'layer2', layer2.show = false;
 
-  let layer4 = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
-    style: 'googlelite'
-  }));
-  layer4.name = '精简', layer4.id = 'layer4', layer4.show = false;
+	let layer3 = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
+		style: 'dark'
+	}));
+	layer3.name = '黑夜', layer3.id = 'layer3', layer3.show = false;
 
-  let layer5 = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
-    style: 'redalert'
-  }));
-  layer5.name = '红色警戒', layer5.id = 'layer5', layer5.show = false;
+	let layer4 = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
+		style: 'googlelite'
+	}));
+	layer4.name = '精简', layer4.id = 'layer4', layer4.show = false;
 
-  this._d3kit.showLayerSwitchPanel([layer, layer2, layer3, layer4, layer5])
+	let layer5 = this._viewer.imageryLayers.addImageryProvider(new Cesium.BaiduImageryProvider({
+		style: 'redalert'
+	}));
+	layer5.name = '红色警戒', layer5.id = 'layer5', layer5.show = false;
+
+	this._d3kit.showLayerSwitchPanel([layer, layer2, layer3, layer4, layer5])
 </script>
